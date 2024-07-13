@@ -2,7 +2,7 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 const modalSubmit= document.getElementById('modalSubmit')
-const taskTitleInputId= document.getElementById('#task-title')
+const taskTitleInputId= document.getElementById('task-title')
 const taskDateInputId= document.getElementById('date')
 const taskDescInputId= document.getElementById('task-desc')
 
@@ -13,10 +13,12 @@ function saveTaskLocal(tasks){
 
 function readTasksFromStorage(){
   let tasks= JSON.parse(localStorage.getItem('tasks')); 
-  if(!tasks){
-    tasks= []
-  }
 
+  if(!tasks){
+    tasks= [];
+  } 
+  //if nothing is found in local storage, we create an empty array that we can push to later
+  return tasks;
 }
 
 
@@ -27,7 +29,7 @@ function generateTaskSubmit(event) {
   // ? Read user input from the form
   const taskTitle = taskTitleInputId.val()
   const taskDate = taskDateInputId.val(); // yyyy-mm-dd format
-  const taskDesc = taskDescInputId.val(); // don't need to trim select input
+  const taskDesc = taskDescInputId.val();
   
 
   
