@@ -7,12 +7,12 @@ const taskDateInputId= document.getElementById('date')
 const taskDescInputId= document.getElementById('task-desc')
 
 
-function saveTaskLocal(tasks){
-  localStorage.setItem('tasks', JSON.stringify(tasks))
+function saveTaskLocal(task){
+  localStorage.setItem('task', JSON.stringify(task))
 }
 
 function readTasksFromStorage(){
-  let tasks= JSON.parse(localStorage.getItem('tasks')); 
+  let tasks= JSON.parse(localStorage.getItem('task')); 
 
   if(!tasks){
     tasks= [];
@@ -25,7 +25,20 @@ function readTasksFromStorage(){
 // Todo: create a function to generate a unique task id
 function generateTaskSubmit(event) { 
   event.preventDefault();
+  event.preventDefault();
+  // Read user input from the form
+  const taskTitle = taskTitleInputId.val()
+  const taskDate = taskDateInputId.val(); // yyyy-mm-dd format
+  const taskDesc = taskDescInputId.val();
 
+  //creates a random id for each for the tasks
+  const newTask= {
+    id: crypto.randomUUID(),
+    title: taskTitle,
+    dueDate: taskDate,
+    description: taskDesc,
+    status: 'to-do',
+  };
 
   
 
@@ -152,9 +165,11 @@ function handleDrop(event, ui) {
   saveTaskLocal(tasks);
   renderTaskList();
 
-  
+
 }
-// submitBtn
+
+modalSubmit.on('submit', handleAddTask);
+
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
 
